@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RSVP - Annie's Birthday Party</title>
+</head>
+<body>
+    <h1>Welcome to Annie's birthday party!</h1>
+    <h3>Please RSVP your spot!</h3>
+
+    <div class="form">
+        <p>Name</p>
+        <input type="text" id="name">
+        <p>What gift will you bring?</p>
+        <input type="text" id="gift">
+        <br>
+        <button id="submit" onclick="addUser()">Submit</button>
+    </div>
+    <br>
+    <div id="count">
+        Paticipants number: 0
+    </div>
+
+    <ul id="list">
+
+    </ul>
+
+
+
+
+    <script>
+        var userList = []; // 用来储存 user 的信息
+        var list = document.getElementById("list"); // 获取 html 中的 list，为以后添加 html 元素用
+
+        function addUser(){     // 点击 submit button 时触发的功能
+
+            // 添加单个 user 的信息进 userList
+            var user = {
+                name: document.getElementById("name").value,
+                gift: document.getElementById("gift").value
+            }
+            userList.push(user);
+
+            // 把 userList 里的最后一项赋值给变量 userName 和 userGift.  提取 array 的最后一项需要用到 for loop. userList[userNumber] = 报错 我也不知道为啥
+            var userNumber = userList.length;
+            
+            for (i=0; i< (userNumber) ; i++){              
+                var userName = "Name: " + userList[i].name;
+                var userGift = " Gift: " + userList[i].gift;
+            }
+            
+            // 变量的内容收集到了，现在把变量放进 html 里
+            var userInfo = document.createTextNode(userName + userGift); // html 不认识 js变量 只认识 Node，所以先要把变量转换成 Node
+            var li = document.createElement('li'); // 创建一个 html元素：li
+            li.appendChild(userInfo); // 把 userInfo 放进 li
+            list.appendChild(li);  // 把 li 放进 list   list 是啥在第二行有定义
+
+            // 改变用户数量
+            document.getElementById("count").innerHTML = "Paticipants number: " + userNumber;
+
+        } // the end of addUser()
+    
+    </script>
+</body>
+</html>
